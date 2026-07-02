@@ -1,0 +1,45 @@
+name: Build iOS Application
+
+# Déclenche la compilation à chaque push sur la branche main
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-ios:
+    # IMPORTANT : Utilise un serveur macOS de GitHub (requis pour iOS)
+    runs-on: macos-latest
+
+    steps:
+    # 1. Récupère le code du dépôt
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # 2. Installe Java (requis pour exécuter Gradle)
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+
+    # 3. Configure Gradle et gère le cache pour accélérer les futurs builds
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v4
+
+    # 4. Donne les permissions d'exécution au script Gradle
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+
+    # 5. Compile le framework iOS (ou l'application) via Gradle
+    # Remplacez 'iosX64' par le simulateur ou la tâche exacte de votre projet KMP
+    - name: Build iOS Framework
+      run: ./gradlew iosX64MainBinaries
+
+    # 6. Optionnel : Sauvegarde le fichier généré pour pouvoir le télécharger
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ios-framework
+        path: **/build/bin/iosX64/
