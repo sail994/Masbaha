@@ -1,0 +1,9 @@
+<resources>
+    <!-- Couleurs Mode Clair -->
+    <color name="bg_light">#FFFFFF</color>
+    <color name="text_light">#121212</color>
+
+    <!-- Couleurs Mode Nuit (AMOLED) -->
+    <color name="bg_dark">#000000</color>
+    <color name="text_dark">#ECEFF1</color>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Utilisation du thème standard de base Android, invisible sous Compose -->
+    <style name="Theme.Masbaha" parent="android:Theme.NoTitleBar.Fullscreen">
+        <!-- Suppression des attributs problématiques -->
+    </style>
+</resources>
